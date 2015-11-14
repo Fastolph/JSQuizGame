@@ -17,81 +17,31 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
-    <h1>Hello, what is your name, brave hero ?</h1>
-	<input type="text" value="" id="name"/>
-	<div id="keyboard">
-	    <input type='button' value='A' />
-	    <input type='button' value='B' />
-	    <input type='button' value='C' />
-	    <input type='button' value='D' />
-	    <input type='button' value='E' />
-	    <input type='button' value='F' />
-	    <input type='button' value='G' />
-	    <input type='button' value='H' />
-	    <input type='button' value='I' />
-	    <input type='button' value='J' />
-	    <input type='button' value='K' />
-	    <input type='button' value='L' />
-	    <input type='button' value='M' />
-	    <input type='button' value='N' />
-	    <input type='button' value='O' />
-	    <input type='button' value='P' />
-	    <input type='button' value='Q' />
-	    <input type='button' value='R' />
-	    <input type='button' value='S' />
-	    <input type='button' value='T' />
-	    <input type='button' value='U' />
-	    <input type='button' value='V' />
-	    <input type='button' value='W' />
-	    <input type='button' value='X' />
-	    <input type='button' value='Y' />
-	    <input type='button' value='Z' />
-	    <input type='button' value='1' />
-            <input type='button' value='2' />
-            <input type='button' value='3' />
-            <input type='button' value='4' />
-            <input type='button' value='5' />
-            <input type='button' value='6' />
-            <input type='button' value='7' />
-            <input type='button' value='8' />
-            <input type='button' value='9' />
-            <input type='button' value='0' />
-            <input type='button' value='@' />
-	    <input type='button' value='&' />
-            <input type='button' value='!' />
-            <input type='button' value='#' />
-            <input type='button' value='?' />
-            <input type='button' value='$' />
-            <input type='button' value='€' />
-    </div>
-    <script src="libraries/jquery-2.1.4.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="libraries/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-
-    <script>
-
-    function canGame() {
-        return "getGamepads" in navigator;
-    }
-	alert(navigator.getGamepads());
-      $(document).ready( function(){
+  <body ng-app="JQGapp">
+    <div id="musique" ng-show="musictext != null">
+		<audio controls id="m_player">
+		Votre navigateur ne permet pas de jouer de la musique.
+		</audio>
+		<p>Musique : {{musictext}}</p>
+	</div>
 	
-	$(window).on("gamepadconnected", function() {
-                console.log("connection event "+canGame);
-            });
- 
-            $(window).on("gamepaddisconnected", function() {
-                console.log("disconnection event "+canGame);
-            });
-alert(navigator.getGamepads());
-        $("#keyboard input").click(function(e) {
-          e.preventDefault();
-          $('#name').attr("value",
-		$('#name').attr("value") + $(this).attr('value'));
-        });
-      });
-    </script>
-
-  </body>
+	</div>
+	<div id="content">
+        <ng-view></ng-view>
+    </div>
+	<script type="text/javascript" src="libraries/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="libraries/angular-1.5.0.min.js"></script>
+	<script type="text/javascript" src="libraries/angular-route-1.5.0.min.js"></script>
+    <script type="text/javascript" src="libraries/bootstrap-3.3.5/js/bootstrap.min.js"></script>	
+	<script type="text/javascript" src="src/js/app.js"></script>
+	<script type="text/javascript" src="src/js/routing.js"></script>
+	<script type="text/javascript" src="src/js/plService.js"></script>
+	<script type="text/javascript" src="src/js/musicService.js"></script>
+	<script type="text/javascript" src="src/js/soundService.js"></script>
+	<script type="text/javascript" src="src/js/quizService.js"></script>
+	<script type="text/javascript" src="src/js/nameController.js"></script>
+	<script type="text/javascript" src="src/js/gameController.js"></script>
+	<script type="text/javascript" src="src/js/quizController.js"></script>
+	<script type="text/javascript" src="src/js/creditController.js"></script>
+</body>
 </html>

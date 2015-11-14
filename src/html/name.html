@@ -1,0 +1,10 @@
+<h1>Hello, what is your name, brave hero ?</h1>
+<input type="text" value="" id="name" ng-model="playername"/>
+<div id="keyboard">
+	<button ng-repeat="letter in letterlist" ng-click="updatePlayerName(letter);">{{letter}}</button>  
+	<button ng-click="spacer();" class="fat">[SPACE]</button>
+	<button ng-click="backspace();" class="fat">&lt;-</button>
+	<br />
+	<br />
+	<button ng-show="playername.trim().length > 2" ng-click="changeView()" class="fat">Go !</button>
+</div>

@@ -1,0 +1,11 @@
+{'StartButtons':['A',],
+'Rep1Buttons':['Z',],
+'Rep2Buttons':['E',],
+'Rep3Buttons':['R',],
+'Rep4Buttons':['T',],
+'DifficultyLevels':['Easy mode',Hard mode'],
+'QuestionsByDifficultyLevel':[10,5],
+'AnswersByDifficultyLevel':[2,3],
+'ShuffleIntoDifficulty': false,
+'ShuffleAnswers':true}
+

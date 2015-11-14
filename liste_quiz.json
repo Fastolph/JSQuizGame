@@ -1,0 +1,25 @@
+{
+"path":"/asset/quiz/",
+"list":[
+	{"name":"la category 1",
+	"content":
+	[
+		{"name":"quiz name 1 + quiz name 1 quiz name 1....quiz name 1 quiz name 1 + quiz name 1 quiz name 1 quiz name 1", "url":"quiz.json"},
+		{"name":"quiz name 2","url":"quiz.json"}
+	]},
+	{"name":"Une category 2 Une category 2 Une category 2 Une category 2 Une category 2 Une category 2 Une category 2 Une category 2",
+	"content":
+	[
+		{"name":"quiz name 1","url":"quiz.json"},
+		{"name":"quiz name 2","url":"quiz.json"},
+		{"name":"quiz name 3","url":"quiz.json"},
+		{"name":"quiz name 4","url":"quiz.json"}
+	]},
+	{"name":"Ma category 3",
+	"content":
+	[
+		{"name":"quiz name 1","url":"quiz.json"},
+		{"name":"quiz name 2","url":"quiz.json"},
+		{"name":"quiz name 3","url":"quiz.json"}
+	]}
+]}

@@ -1,0 +1,17 @@
+<div id="title">
+	<span id="playername">{{playername}}</span>
+	<span id="subtitle">vs the world </span>
+</div>
+
+<div id="question" ng-show="currentQuestion != null">
+<h1>{{currentQuestion.text}}</h1>
+<p>{{currentQuestion.rep1}}</p>
+<p>{{currentQuestion.rep2}}</p>
+<p>{{currentQuestion.rep3}}</p>
+<p>{{currentQuestion.rep4}}</p>
+</div>
+<div id="cartouche" ng-show="currentQuestion != null">
+<p>Score : {{score}}</p>
+<p>Question : {{numeroQuestion}} / {{nbQuestions}}</p> 
+</div>
+

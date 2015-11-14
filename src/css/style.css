@@ -1,6 +1,26 @@
+@font-face{
+    font-family : "dusty";
+    src : url('../../assets/font/Dusty.ttf') format('truetype');
+}
+@font-face{
+    font-family : "superfly";
+    src : url('../../assets/font/SUPERFLY.TTF') format('truetype');
+}
+@font-face{
+    font-family : "pixantiqua";
+    src : url('../../assets/font/PixAntiqua.TTF') format('truetype');
+}
+* {
+	font-size:16pt;
+	font-family:'pixantiqua';
+}
 body {
 	background-color:#0071B7;
 	color:white;
+}
+#content {
+	margin:10px;
+	padding:10p;
 }
 h1 {
   	 margin:25px;
@@ -8,23 +28,87 @@ h1 {
 #name {
 	width:1000px;
 	background : none;
-        font-size:24px;
-        color:white;
-        border:0;
+	font-size:24px;
+	color:white;
+	border:3px #1182C8 solid;
 	margin:25px;
 }
 #keyboard {
 	width:1024px;
 }
-
-#keyboard input {
+#keyboard button {
 	float : left;
-	background : none;
+	background : #1182C8;
 	margin:5px 25px;
 	width:30px;
 	font-size:24px;
 	color:white;
 	border:0;
+	padding:1px;
+}
+#keyboard button.fat{
+	width:85px;
+}
+#musique {
+	position:fixed;
+	top: 5px;
+	right:10px;
+	
+}
+#cartouche {
+	position:fixed;
+	bottom:5px;
+	right:10px;
+}
+#title {
+	width:500px;
+	margin:0 auto;
+}
+#title #playername{
+	font-family:'superfly';
+	font-size:45pt;
+	display:block;
+}
+#title #subtitle{
+	font-family:'dusty';
+	font-size:17pt;
+	display:block;
+}
+#go {
+	background : #1182C8;
+	width:60px;
+	text-align:center;
+	width:60px;
+	font-size:24px;
+	color:white;
+	border:0;
+	padding:1px;
 }
 
-
+button.catbtn {
+	margin:10px;
+	background : #1182C8;
+	text-align:center;
+	width:220px;
+	height:80px;
+	font-size:16px;
+	color:white;
+	border:0;
+	padding:1px;
+	overflow:hidden;
+	float:left;
+}
+button.quizbtn {
+	margin:10px;
+	background : #1182C8;
+	text-align:left;
+	width:280px;
+	height:20px;
+	font-size:15px;
+	color:white;
+	border:0;
+	padding:1px;
+	overflow:hidden;
+	float:left;
+}
+	
