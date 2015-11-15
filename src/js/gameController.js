@@ -31,11 +31,10 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 	var url = quizService.getFullPath();
 	$http.get(url)
 	.success(function(data) {
+		$interval(goStart, 1600, 1);
 		$scope.theme = data.theme;
 		difficulties  = data.questions.sort(keysort('difficulty',true)); //Note : Tri décroissant
-		$scope.nbQuestions = difficulties.length;
-		lastAnsweredQuestion = 0;
-		getQuestion();
+		$scope.nbQuestions = difficulties.length;		
 		plService.setScore(0);
 		plService.setAnswers(0);
 		
@@ -103,9 +102,15 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 		$location.path("/loose"); 
 	}
 	
+	goStart = function(){
+		lastAnsweredQuestion = 0;
+		getQuestion();
+	}
+		
+	
 	goWin = function() {
-	plService.setScore($scope.score);
-	plService.setAnswers($scope.numeroQuestion);
+		plService.setScore($scope.score);
+		plService.setAnswers($scope.numeroQuestion);
 		$location.path("/win"); 
 	}
 	
