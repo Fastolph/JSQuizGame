@@ -18,6 +18,11 @@ body {
 	background-color:#0071B7;
 	color:white;
 }
+body.finish {
+	background-color:black;
+	color:white;
+}
+
 #content {
 	margin:10px;
 	padding:10p;
@@ -60,6 +65,10 @@ h1 {
 	bottom:5px;
 	right:10px;
 }
+#cartouche p {
+	font-size:8pt;
+	text-align:right;
+}
 #title {
 	width:500px;
 	margin:0 auto;
@@ -68,11 +77,13 @@ h1 {
 	font-family:'superfly';
 	font-size:45pt;
 	display:block;
+	text-align:center;
 }
 #title #subtitle{
 	font-family:'dusty';
 	font-size:17pt;
 	display:block;
+	text-align:center;
 }
 #go {
 	background : #1182C8;
@@ -111,4 +122,33 @@ button.quizbtn {
 	overflow:hidden;
 	float:left;
 }
-	
+div.error {
+	color:red;
+}
+#question {
+	width:500px;
+	margin:auto;
+}
+#question h1 {
+	width:100%;
+	text-align:center;
+}
+#question button.reponseQuiz {
+	margin:10px auto;
+	width:90%;
+	text-align:left;
+	height:20px;
+	font-size:15px;
+	color:white;
+	border:0;
+	padding:1px;
+	overflow:hidden;
+	float:left;
+	background : #1182C8;
+}
+#question button.reponseQuiz.red{
+	background-color:red;
+}
+#question button.reponseQuiz.green{
+	background-color:green;
+}

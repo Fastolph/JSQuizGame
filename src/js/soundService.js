@@ -9,6 +9,13 @@ app.service("soundService", function () {
 		},
 		intro: function () {
 			intro.play();
+		},
+		win: function () {
+			click.play();
+		},
+		loose: function () {
+			click.play();
 		}
+		
 	}
 });
