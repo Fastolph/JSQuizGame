@@ -114,11 +114,12 @@ button.quizbtn {
 	background : #1182C8;
 	text-align:left;
 	width:280px;
-	height:20px;
+	height:30px;
+	line-height:25px;
 	font-size:15px;
 	color:white;
 	border:0;
-	padding:1px;
+	padding:1px 1px 1px 5px;
 	overflow:hidden;
 	float:left;
 }
@@ -135,20 +136,61 @@ div.error {
 }
 #question button.reponseQuiz {
 	margin:10px auto;
-	width:90%;
+	width:100%;
 	text-align:left;
-	height:20px;
 	font-size:15px;
 	color:white;
 	border:0;
 	padding:1px;
 	overflow:hidden;
 	float:left;
+	padding:5px 5px 5px 20px;
+	background : #1182C8;
+}
+#question button.confirmQuiz{
+	margin:10px auto;
+	width:100%;
+	text-align:center;
+	font-size:15px;
+	color:white;
+	border:0;
+	padding:1px;
+	overflow:hidden;
+	float:left;
+	padding:20px 5px 5px 20px;
 	background : #1182C8;
 }
 #question button.reponseQuiz.red{
-	background-color:red;
+	background-color:#DC143C;
 }
 #question button.reponseQuiz.green{
-	background-color:green;
+	background-color:#3CB371;
+}
+#question button.reponseQuiz.highlight{
+	background-color:#FFA500;
+}
+p.small {
+	font-size:9pt;
+}
+#question button.reponseQuiz::before {
+	content:" ";
+	border-radius: 50%;
+	width: 15px;
+	height: 15px; 
+	display:inline-block;
+	position: relative;
+    left: -5px;
+    top: 1px;
+}
+.circle0::before {
+	background:#3aa4e2;
+}
+.circle1::before {
+	background:#f27727;
+}
+.circle2::before {
+	background:#42bf65;
+}
+.circle3::before {
+	background:#f4dd2a;
 }

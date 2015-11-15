@@ -2,6 +2,6 @@
 <button ng-hide='currentCat != null' value="c.key" class="catbtn" ng-repeat="c in categories" ng-click="chooseCat(c.key);">{{c.name}}</button>  
 
 <p ng-hide='currentCat == null' >{{currentCatText}} - Choisissez un quiz</p>
-<button ng-hide='currentCat == null' value="q.key" class="quizbtn" ng-repeat="q in quizInCategory" ng-click="loadQuiz(q.key);">{{q.name}}</button>  
+<button ng-hide='currentCat == null' value="q.key" class="quizbtn" ng-repeat="q in quizInCategory" ng-click="loadQuiz(q.key);">&nbsp;{{q.name}}</button>  
 
 <div ng-show='error != null' class="error">{{error}}</div> 

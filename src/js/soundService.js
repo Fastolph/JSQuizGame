@@ -1,20 +1,30 @@
 app.service("soundService", function () {
 
-	var click = new Audio('assets/sound/click.ogg');
-	var intro = new Audio('assets/music/we_are_sex_bobomb.ogg');
+	var clickfx = new Audio('assets/sound/click.ogg');
+	var loosefx = new Audio('assets/sound/pac-death.ogg');
+	var winfx = new Audio('assets/sound/sonic-ring.ogg');
+	var introfx = new Audio('assets/music/we_are_sex_bobomb.ogg');
+	var yattafx = new Audio('assets/sound/yatta.ogg');
+	var youloosefx = new Audio('assets/sound/you-loose.ogg');
 	
 	return {
 		click: function () {
-			click.play();
+			clickfx.play();
 		},
 		intro: function () {
-			intro.play();
+			introfx.play();
 		},
 		win: function () {
-			click.play();
+			winfx.play();
 		},
 		loose: function () {
-			click.play();
+			loosefx.play();
+		},
+		yatta: function () {
+			yattafx.play();
+		},
+		youloose: function () {
+			youloosefx.play();
 		}
 		
 	}

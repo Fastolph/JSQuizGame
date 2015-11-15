@@ -5,7 +5,8 @@
 
 <div id="question" ng-show="currentQuestion != null">
 <h1>{{currentQuestion.statement}}</h1>
-	<button class="reponseQuiz" id="reponse-{{currentQuestion.id}}-{{$index}}" ng-repeat="a in currentQuestion.answers" ng-click='answering(currentQuestion.id, $index, a.weight)'>{{a.text}}</button>
+	<button class="reponseQuiz circle{{$index}}" id="reponse-{{currentQuestion.id}}-{{$index}}" ng-repeat="a in currentQuestion.answers" ng-click='highlight(currentQuestion.id, $index)'>{{a.text}}</button>
+	<button class="confirmQuiz" ng-repeat="a in currentQuestion.answers" ng-show="highlighted == $index" ng-click='answering(currentQuestion.id, $index, a.weight)'>Confirmer</button>
 </div>
 <div id="cartouche" ng-show="currentQuestion != null">
 <p>Theme : {{theme}}</p>

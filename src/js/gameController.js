@@ -1,6 +1,7 @@
 app.controller('gameController', ['$route','$location','$interval','$http','$scope','plService','soundService', 'quizService',
  function($route, $location, $interval, $http, $scope, plService,soundService,quizService) {
  
+	$("body").removeClass("finish");
 	$scope.playername = plService.getName();
 	$scope.score = 0;
 	$scope.numeroQuestion = 1;
@@ -13,6 +14,7 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 	$scope.maxScore = 10000;
 	$scope.delay = 3000;
 	$scope.theme = "";
+	$scope.highlighted = null;
 	
 	var difficulties = []; //Tri par ordre de difficulté
 	var lastAnsweredQuestion = 0;
@@ -43,6 +45,7 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 	});
 	
 	var getQuestion = function(){
+		$scope.highlighted = null;
 		$scope.currentQuestion = difficulties.pop();
 		if($scope.currentQuestion == null) {
 			$interval(goWin, $scope.delay, 1);
@@ -61,10 +64,18 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 		}
 	}
 	
+	$scope.highlight = function(idQuestion, index){
+		$("#question .reponseQuiz").removeClass("highlight");
+		soundService.click();
+		$("#reponse-"+idQuestion+"-"+index).addClass("highlight");
+		$scope.highlighted = index;
+	}
+	
 	$scope.answering = function(idQuestion, index, w){
 		if(lastAnsweredQuestion == idQuestion) return;
 		lastAnsweredQuestion = idQuestion;
 		$interval.cancel(chrono);
+		$("#reponse-"+idQuestion+"-"+index).removeClass("highlight");
 		if(w == 5) {
 			soundService.win();
 			$scope.score += $scope.currentScore;
