@@ -1,7 +1,9 @@
-app.controller('winController', ['$route','$location','$interval','$scope','soundService',
-function($route, $location,$interval,$scope,soundService ) {
+app.controller('winController', ['$route','$location','$interval','$scope','soundService','plService',
+function($route, $location,$interval,$scope,soundService,plService ) {
 	soundService.yatta();
-	$scope.delay = 7000;
+	$scope.delay = 8000;
+	$scope.score = plService.getScore();
+	$scope.nbQuestions = plService.getAnswers();
 	$("body").addClass("finish");
 	$interval(function(){
 		$location.path("/credits"); 
@@ -10,10 +12,12 @@ function($route, $location,$interval,$scope,soundService ) {
 
 
 
-app.controller('looseController', ['$route','$location','$interval','$scope','soundService',
-function($route, $location,$interval,$scope,soundService ) {
+app.controller('looseController', ['$route','$location','$interval','$scope','soundService','plService',
+function($route, $location,$interval,$scope,soundService,plService ) {
 	soundService.youloose();
-	$scope.delay = 7000;
+	$scope.delay = 8000;
+	$scope.score = plService.getScore();
+	$scope.nbQuestions = plService.getAnswers();
 	$("body").addClass("finish");
 	$interval(function(){
 		$location.path("/credits"); 

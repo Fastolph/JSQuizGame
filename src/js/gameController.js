@@ -4,14 +4,14 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 	$("body").removeClass("finish");
 	$scope.playername = plService.getName();
 	$scope.score = 0;
-	$scope.numeroQuestion = 1;
+	$scope.numeroQuestion = 0;
 	$scope.nbQuestions = "...";
 	$scope.currentQuestion = null;
 	$scope.haltOnErrors = true;
 	$scope.haltOnNoScore = true;		
 	$scope.currentScore;
-	$scope.timerDelay = 200;
-	$scope.maxScore = 10000;
+	$scope.timerDelay = 100;
+	$scope.maxScore = 600;
 	$scope.delay = 3000;
 	$scope.theme = "";
 	$scope.highlighted = null;
@@ -36,6 +36,8 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 		$scope.nbQuestions = difficulties.length;
 		lastAnsweredQuestion = 0;
 		getQuestion();
+		plService.setScore(0);
+		plService.setAnswers(0);
 		
 	})
 	.error(function(data,status,error,config){
@@ -45,10 +47,11 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 	});
 	
 	var getQuestion = function(){
+		$scope.numeroQuestion++;
 		$scope.highlighted = null;
 		$scope.currentQuestion = difficulties.pop();
 		if($scope.currentQuestion == null) {
-			$interval(goWin, $scope.delay, 1);
+			$interval(goWin, 1, 1);
 		}
 		$scope.currentScore = $scope.maxScore;
 		chrono = $interval(decreaseCurrentScore, $scope.timerDelay);
@@ -56,11 +59,13 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 	
 	var decreaseCurrentScore = function(){
 		
-		if($scope.currentScore < 1) {
+		if($scope.currentScore == 0) {
+			$interval.cancel(chrono);
 			if($scope.haltOnNoScore) $interval(goLoose, $scope.delay, 1);
 		}
 		else {
 			$scope.currentScore--;
+			if($scope.currentScore == 130) soundService.drowning();
 		}
 	}
 	
@@ -72,6 +77,7 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 	}
 	
 	$scope.answering = function(idQuestion, index, w){
+		soundService.stopall();
 		if(lastAnsweredQuestion == idQuestion) return;
 		lastAnsweredQuestion = idQuestion;
 		$interval.cancel(chrono);
@@ -87,14 +93,19 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 			$("#reponse-"+idQuestion+"-"+index).addClass("red");
 			if($scope.haltOnErrors) $interval(goLoose, $scope.delay, 1);
 			else $interval(getQuestion, $scope.delay, 1);
-		}		
+		}
+		$scope.highlighted = null;		
 	}
 	
 	goLoose = function(){
+		plService.setScore($scope.score);
+		plService.setAnswers($scope.numeroQuestion);
 		$location.path("/loose"); 
 	}
 	
 	goWin = function() {
+	plService.setScore($scope.score);
+	plService.setAnswers($scope.numeroQuestion);
 		$location.path("/win"); 
 	}
 	
