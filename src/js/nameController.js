@@ -1,5 +1,5 @@
-app.controller('nameController', ['$route','$location','$scope','plService','soundService'
-,function($route, $location, $scope, plService, soundService ) {
+app.controller('nameController', ['$route','$location','$scope','plService','soundService','configService'
+,function($route, $location, $scope, plService, soundService,configService ) {
 
 	/* Name creation specific */
 	var doc;
@@ -10,6 +10,8 @@ app.controller('nameController', ['$route','$location','$scope','plService','sou
 	 '1','2','3','4','5','6','7','8','9','0','!','&','#','?'];
 	 
 	$scope.playername = "";	
+	
+	configService.load("config.json");
 	
 	var newView = function(view){ 
 		soundService.click();
@@ -31,14 +33,22 @@ app.controller('nameController', ['$route','$location','$scope','plService','sou
 		$scope.playername = $scope.playername.substring(0, $scope.playername.length-1);
 	};
 	
-	
-	/* Global */
 	$scope.changeView = function(){ 
 		plService.setName($scope.playername);
 		soundService.click();
 		$location.path("/quiz"); 
 	};
 	
+	
+	$scope.clickOrGo = function(event){		
+		if(event.which == 13) $scope.changeView();
+		else  soundService.click();
+		}	
+}]);
+
+app.controller('goController', ['$route','$location','$scope','plService','soundService'
+,function($route, $location, $scope, plService, soundService) {
+
 	$scope.prepare_and_go = function(){		
 		plService.setName("");
 		soundService.click();
@@ -46,3 +56,4 @@ app.controller('nameController', ['$route','$location','$scope','plService','sou
 	};
 	
 }]);
+

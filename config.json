@@ -1,11 +1,48 @@
-{'StartButtons':['A',],
-'Rep1Buttons':['Z',],
-'Rep2Buttons':['E',],
-'Rep3Buttons':['R',],
-'Rep4Buttons':['T',],
-'DifficultyLevels':['Easy mode',Hard mode'],
-'QuestionsByDifficultyLevel':[10,5],
-'AnswersByDifficultyLevel':[2,3],
-'ShuffleIntoDifficulty': false,
-'ShuffleAnswers':true}
+{
+	"intro": {
+		"jouer":true,
+		"musique":"assets/music/we_are_sex_bobomb.ogg",
+		"timer_avant_jeu":13500
+	},
+	"timer": {
+		"utiliser":true,
+		"mort_si_zero":true,
+		"duree":600,
+		"lancer_noyage":true,
+		"timer_noyade":130,
+		"millisecondes_intervalle":100	
+	},
+	"finish" : {
+		"duree_avant_suite":3000,
+		"duree_ecran_win":8000,
+		"duree_ecran_loose":8000,
+		"mort_si_erreur":true
+	},
+	"bouttons": {
+		"Start":["A","Y","Q","H"],
+		"Reponse1":["Z","U","S","J"],
+		"Reponse2":["E","I","D","K"],
+		"Reponse3":["R","O","F","L"],
+		"Reponse4":["T","P","G","M"]
+	},
+	"difficulte": {
+		"Nombre_Niveaux":2,
+		"Label_Niveaux":["Easy mode","Hard mode"],
+		"Nombre_Questions":[10,5],
+		"Nombre_Reponses":[2,3]
+	},
+	"reponses": {
+		"PrendreAvecLePlusDePoids":true,
+		"Melanger":true
+	},
+	"bonus": {
+		"fiftyfifty":true,
+		"appel_public":true,
+		"appel_ami":true
+	}
+}
+
+
+
+
 

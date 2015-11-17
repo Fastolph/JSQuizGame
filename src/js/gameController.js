@@ -1,21 +1,29 @@
-app.controller('gameController', ['$route','$location','$interval','$http','$scope','plService','soundService', 'quizService',
- function($route, $location, $interval, $http, $scope, plService,soundService,quizService) {
+app.controller('gameController', ['$route','$location','$interval','$http','$scope','plService','soundService', 'quizService','configService',
+ function($route, $location, $interval, $http, $scope, plService,soundService,quizService,configService) {
  
 	$("body").removeClass("finish");
 	$scope.playername = plService.getName();
 	$scope.score = 0;
 	$scope.numeroQuestion = 0;
 	$scope.nbQuestions = "...";
-	$scope.currentQuestion = null;
-	$scope.haltOnErrors = true;
-	$scope.haltOnNoScore = true;		
+	$scope.currentQuestion = null;	
 	$scope.currentScore;
-	$scope.timerDelay = 100;
-	$scope.maxScore = 600;
-	$scope.delay = 3000;
 	$scope.theme = "";
 	$scope.highlighted = null;
-	
+	var jouer_intro = configService.get('intro','jouer');	
+	var url_musique_intro = configService.get('intro','musique');
+	if(jouer_intro) {
+		soundService.setIntro(url_musique_intro);
+	}
+	var timer_intro = configService.get('intro','timer_avant_jeu');
+	var dieOnErrors = configService.get('finish','mort_si_erreur');
+	var dieOnTimeOut = configService.get('timer','mort_si_zero');
+	var timerDelay = configService.get('timer','millisecondes_intervalle');
+	var maxScore = configService.get('timer','duree');
+	var delay = configService.get('finish','duree_avant_suite');
+	var faire_noyade =  configService.get('timer','lancer_noyage');
+	var timer_noyade =  configService.get('timer','timer_noyade');
+
 	var difficulties = []; //Tri par ordre de difficulté
 	var lastAnsweredQuestion = 0;
 	var chrono;
@@ -27,11 +35,16 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 	  }
 	}
 	
+	var goStart = function(){
+		lastAnsweredQuestion = 0;
+		getQuestion();
+	}
+	
 	soundService.intro();
 	var url = quizService.getFullPath();
 	$http.get(url)
 	.success(function(data) {
-		$interval(goStart, 1600, 1);
+		
 		$scope.theme = data.theme;
 		difficulties  = data.questions.sort(keysort('difficulty',true)); //Note : Tri décroissant
 		$scope.nbQuestions = difficulties.length;		
@@ -44,6 +57,7 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 	   $scope.currentCat = null;
 	   $scope.error = "Impossible de charger le quiz";
 	});
+	$interval(goStart, timer_intro, 1);
 	
 	var getQuestion = function(){
 		$scope.numeroQuestion++;
@@ -52,19 +66,19 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 		if($scope.currentQuestion == null) {
 			$interval(goWin, 1, 1);
 		}
-		$scope.currentScore = $scope.maxScore;
-		chrono = $interval(decreaseCurrentScore, $scope.timerDelay);
+		$scope.currentScore = maxScore;
+		chrono = $interval(decreaseCurrentScore, timerDelay);
 	}
 	
 	var decreaseCurrentScore = function(){
 		
 		if($scope.currentScore == 0) {
 			$interval.cancel(chrono);
-			if($scope.haltOnNoScore) $interval(goLoose, $scope.delay, 1);
+			if(dieOnTimeOut) $interval(goLoose, delay, 1);
 		}
 		else {
 			$scope.currentScore--;
-			if($scope.currentScore == 130) soundService.drowning();
+			if(faire_noyade && $scope.currentScore == timer_noyade) soundService.drowning();
 		}
 	}
 	
@@ -85,30 +99,24 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 			soundService.win();
 			$scope.score += $scope.currentScore;
 			$("#reponse-"+idQuestion+"-"+index).addClass("green");
-			$interval(getQuestion, $scope.delay, 1);
+			$interval(getQuestion, delay, 1);
 		} else {
 			soundService.loose();			
 			$scope.score -= $scope.currentScore;			
 			$("#reponse-"+idQuestion+"-"+index).addClass("red");
-			if($scope.haltOnErrors) $interval(goLoose, $scope.delay, 1);
-			else $interval(getQuestion, $scope.delay, 1);
+			if(dieOnErrors) $interval(goLoose, delay, 1);
+			else $interval(getQuestion, delay, 1);
 		}
 		$scope.highlighted = null;		
 	}
 	
-	goLoose = function(){
+	var goLoose = function(){
 		plService.setScore($scope.score);
 		plService.setAnswers($scope.numeroQuestion);
 		$location.path("/loose"); 
 	}
-	
-	goStart = function(){
-		lastAnsweredQuestion = 0;
-		getQuestion();
-	}
 		
-	
-	goWin = function() {
+	var goWin = function() {
 		plService.setScore($scope.score);
 		plService.setAnswers($scope.numeroQuestion);
 		$location.path("/win"); 

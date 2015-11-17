@@ -4,12 +4,14 @@ app.service("soundService", function () {
 	var loosefx = new Audio('assets/sound/pac-death.ogg');
 	var winfx = new Audio('assets/sound/sonic-ring.ogg');
 	var introfx = new Audio('assets/music/we_are_sex_bobomb.ogg');
-	var drowningfx = new Audio('assets/music/sonic-drowning.ogg');
-	
+	var drowningfx = new Audio('assets/music/sonic-drowning.ogg');	
 	var yattafx = new Audio('assets/sound/yatta.ogg');
 	var youloosefx = new Audio('assets/sound/you-loose.ogg');
 	
 	return {
+		setIntro: function(url) {
+			if(url !== false) introfx = new Audio(url);
+		},
 		click: function () {
 			clickfx.play();
 		},
@@ -38,5 +40,5 @@ app.service("soundService", function () {
 			introfx.currentTime = 0;
 		}
 		
-	}
+	};
 });
