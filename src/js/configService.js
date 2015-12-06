@@ -27,7 +27,7 @@ app.service("configService",['$http', function ($http) {
 				parse(data);				
 			})
 			.error(function(data,status,error,config){		
-			   //TO DO ?
+			   alert("impossible de charger la configuration, erreur critique");
 			});
 		}
 	};

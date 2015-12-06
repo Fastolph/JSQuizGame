@@ -1,17 +1,15 @@
-app.controller('nameController', ['$route','$location','$scope','plService','soundService','configService'
-,function($route, $location, $scope, plService, soundService,configService ) {
+app.controller('nameController', ['$route','$location','$scope','plService','soundService','configService','musicService'
+,function($route, $location, $scope, plService, soundService,configService,musicService ) {
 
 	/* Name creation specific */
 	var doc;
-	$("body").removeClass("finish");
-	
+	$("body").removeClass("finish");	
 	$scope.letterlist = [ 'A','B','C','D','E', 'F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
 	 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-	 '1','2','3','4','5','6','7','8','9','0','!','&','#','?'];
-	 
-	$scope.playername = "";	
-	
+	 '1','2','3','4','5','6','7','8','9','0','!','&','#','?'];	 
+	$scope.playername = "";		
 	configService.load("config.json");
+	musicService.load("liste_musiques.json");
 	
 	var newView = function(view){ 
 		soundService.click();
@@ -38,17 +36,18 @@ app.controller('nameController', ['$route','$location','$scope','plService','sou
 		soundService.click();
 		$location.path("/quiz"); 
 	};
-	
-	
+		
 	$scope.clickOrGo = function(event){		
 		if(event.which == 13) $scope.changeView();
-		else  soundService.click();
-		}	
+		else soundService.click();
+	};
 }]);
 
 app.controller('goController', ['$route','$location','$scope','plService','soundService'
 ,function($route, $location, $scope, plService, soundService) {
 
+	$("body").addClass("finish");
+	
 	$scope.prepare_and_go = function(){		
 		plService.setName("");
 		soundService.click();

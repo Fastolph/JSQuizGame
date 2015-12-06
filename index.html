@@ -17,15 +17,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body ng-app="JQGapp">
-    <div id="musique" ng-show="musictext != null">
-		<audio controls id="m_player">
-		Votre navigateur ne permet pas de jouer de la musique.
-		</audio>
-		<p>Musique : {{musictext}}</p>
-	</div>
-	
-	</div>
+  <body ng-app="JQGapp">  
 	<div id="content">
         <ng-view></ng-view>
     </div>

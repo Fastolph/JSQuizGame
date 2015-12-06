@@ -1,6 +1,7 @@
 app.service("soundService", function () {
 
 	var clickfx = new Audio('assets/sound/click.ogg');
+	var hardmode = new Audio('assets/sound/fatality.ogg');	
 	var loosefx = new Audio('assets/sound/pac-death.ogg');
 	var winfx = new Audio('assets/sound/sonic-ring.ogg');
 	var introfx = new Audio('assets/music/we_are_sex_bobomb.ogg');
@@ -32,6 +33,9 @@ app.service("soundService", function () {
 		},
 		drowning: function () {
 			drowningfx.play();
+		},
+		hardmode: function () {
+			hardmode.play();
 		},
 		stopall: function(){
 			drowningfx.pause();

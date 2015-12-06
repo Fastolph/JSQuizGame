@@ -22,6 +22,10 @@ body.finish {
 	background-color:black;
 	color:white;
 }
+body.hard {
+	background-color:red;
+	color:white;
+}
 
 #content {
 	margin:10px;
@@ -54,12 +58,7 @@ h1 {
 #keyboard button.fat{
 	width:85px;
 }
-#musique {
-	position:fixed;
-	top: 5px;
-	right:10px;
-	
-}
+
 #cartouche {
 	position:fixed;
 	bottom:5px;
@@ -147,6 +146,20 @@ div.error {
 	padding:5px 5px 5px 20px;
 	background : #1182C8;
 }
+body.hard #question button.reponseQuiz, body.hard #question button.confirmQuiz{
+	background  : #A52A2A;
+}
+body.hard  #question button.reponseQuiz.red{
+	background-color:#DC143C;
+}
+body.hard  #question button.reponseQuiz.green{
+	background-color:#3CB371;
+}
+body.hard  #question button.reponseQuiz.highlight{
+	background-color:#FFA500;
+}
+
+
 #question button.confirmQuiz{
 	margin:10px auto;
 	width:100%;
@@ -194,4 +207,14 @@ p.small {
 }
 .circle3::before {
 	background:#f4dd2a;
+}
+#musique {
+	position:fixed;
+	top: 5px;
+	right:10px;
+	text-align:right;
+	
+}
+#musique p {
+	font-size:8pt;
 }

@@ -2,13 +2,21 @@
 	<span id="playername">{{playername}}</span>
 	<span id="subtitle">vs the world </span>
 </div>
-
-<div id="question" ng-show="currentQuestion != null">
+<div id="musique" ng-show="musictext != null">
+	<audio controls id="m_player">
+	Votre navigateur ne permet pas de jouer de la musique.
+	</audio>
+	<p>Musique : {{musictext}}</p>
+</div>
+<div id="question" ng-show="currentQuestion != null && !showHardMode">
 <h1>{{currentQuestion.statement}}</h1>
 	<button class="reponseQuiz circle{{$index}}" id="reponse-{{currentQuestion.id}}-{{$index}}" ng-repeat="a in currentQuestion.answers" ng-click='highlight(currentQuestion.id, $index)'>{{a.text}}</button>
 	<button class="confirmQuiz" ng-repeat="a in currentQuestion.answers" ng-show="highlighted == $index" ng-click='answering(currentQuestion.id, $index, a.weight)'>Confirmer</button>
 </div>
-<div id="cartouche" ng-show="currentQuestion != null">
+<div id="HardWarning" ng-show="showHardMode">
+<center><h1>{{hardLabel}}</h1></center>
+</div>
+<div id="cartouche" ng-show="currentQuestion != null && !showHardMode">
 <p>Theme : {{theme}}</p>
 <p>Timer : {{currentScore}}</p>
 <p>Score : {{score}} </p>

@@ -7,15 +7,15 @@
 	"timer": {
 		"utiliser":true,
 		"mort_si_zero":true,
-		"duree":600,
+		"duree":900,
 		"lancer_noyage":true,
 		"timer_noyade":130,
 		"millisecondes_intervalle":100	
 	},
 	"finish" : {
 		"duree_avant_suite":3000,
-		"duree_ecran_win":8000,
-		"duree_ecran_loose":8000,
+		"duree_ecran_win":9000,
+		"duree_ecran_loose":9000,
 		"mort_si_erreur":true
 	},
 	"bouttons": {
@@ -25,11 +25,11 @@
 		"Reponse3":["R","O","F","L"],
 		"Reponse4":["T","P","G","M"]
 	},
-	"difficulte": {
-		"Nombre_Niveaux":2,
-		"Label_Niveaux":["Easy mode","Hard mode"],
-		"Nombre_Questions":[10,5],
-		"Nombre_Reponses":[2,3]
+	"mode_hard": {
+		"startQuestion":10,
+		"label":"You enter Hard mode !",
+		"nbReponsesNormal":2,
+		"nbReponsesHard":3
 	},
 	"reponses": {
 		"PrendreAvecLePlusDePoids":true,

@@ -1,15 +1,19 @@
 {
-"path_normal":"assets/music/normal/",
-"path_hard:"assets/music/hard/",
-"normal_list":[
-		{"url":"Bioshock - The Ocean on His Shoulders.ogg", "type":"audio/ogg"},
-		{"url":"Bubble Bobble - Quest Begins.ogg", "type":"audio/ogg"},
-		{"url":"Civilization V - Baba-Yetu.ogg", "type":"audio/ogg"},
-		{"url":"Mass Effect -  Main Theme.ogg", "type":"audio/ogg"},
-		{"url":"Skyrim - Dragonborn Theme.ogg", "type":"audio/ogg"}
-	],
-"hard_list":[
-		{"url":"Devil May Cry 4 - Swipe of swords.ogg", "type":"audio/ogg"},
-		{"url":"House of the dead 2 - Emperor music.ogg", "type":"audio/ogg"},
-	]
-]}
+	"normal" : {
+		"path":"assets/music/normal/",
+		"list":[
+				{"url":"Bioshock - The Ocean on His Shoulders.ogg", "type":"audio/ogg","volume":0.5},
+				{"url":"Bubble Bobble - Quest Begins.ogg", "type":"audio/ogg","volume":0.5},
+				{"url":"Civilization V - Baba-Yetu.ogg", "type":"audio/ogg","volume":0.5},
+				{"url":"Mass Effect -  Main Theme.ogg", "type":"audio/ogg","volume":0.5},
+				{"url":"Skyrim - Dragonborn Theme.ogg", "type":"audio/ogg","volume":0.5}
+		]
+	},
+	"hard" : {
+		"path":"assets/music/hard/",
+		"list":[
+				{"url":"Devil May Cry 4 - Swipe of swords.ogg", "type":"audio/ogg","volume":0.5},
+				{"url":"House of the dead 2 - Emperor music.ogg", "type":"audio/ogg","volume":0.5}
+		]
+	}
+}
