@@ -1,7 +1,7 @@
 app.controller('nameController', ['$route','$location','$scope','plService','soundService','configService','musicService'
 ,function($route, $location, $scope, plService, soundService,configService,musicService ) {
 
-	/* Name creation specific */
+	/* Gestion du nom. Cette phase sert surtout à meubler et limiter le nombre de quiz à la minute :) */
 	var doc;
 	$("body").removeClass("finish");	
 	$scope.letterlist = [ 'A','B','C','D','E', 'F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',

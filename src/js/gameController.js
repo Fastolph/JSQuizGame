@@ -1,8 +1,9 @@
 app.controller('gameController', ['$route','$location','$interval','$http','$scope','plService','soundService', 'quizService','configService','musicService'
 ,function($route, $location, $interval, $http, $scope, plService,soundService,quizService,configService,musicService) {
  
+	
+	//Chargement des données de base
 	$("body").removeClass("finish");
-
 	$scope.playername = plService.getName();
 	$scope.score = 0;
 	$scope.numeroQuestion = 0;
@@ -12,7 +13,6 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 	$scope.theme = "";
 	$scope.highlighted = null;
 	$scope.musictext = null;	
-	
 	var jouer_intro = configService.get('intro','jouer');	
 	var url_musique_intro = configService.get('intro','musique');
 	if(jouer_intro) {
@@ -31,10 +31,8 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 	var nbReponsesHard =  configService.get('mode_hard','nbReponsesHard');
 	var storedIdQuestion =  null;
 	$scope.hardLabel =  configService.get('mode_hard','label');
-	$scope.showHardMode = false;
-	
-	var buttons_start = configService.get('bouttons','Start');
-	
+	$scope.showHardMode = false;	
+	var buttons_start = configService.get('bouttons','Start');	
 	var buttons_one = configService.get('bouttons','Reponse1');
 	var buttons_two = configService.get('bouttons','Reponse2');
 	var buttons_three = configService.get('bouttons','Reponse3');
@@ -43,6 +41,8 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 	var lastAnsweredQuestion = 0;
 	var chrono;
 	
+	
+	
 	// tri par valeur de clef
 	var keysort = function(key,desc) {
 	  return function(a,b){
@@ -50,21 +50,25 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 	  }
 	}
 	
+	//Lancement de la musique au démarrage du jeu
 	var startMusic = function(){
 		musicService.setCallback(refreshMusicText);
 		musicService.play_normal();
 	}
 	
+	//Chargement du jeu
 	var goStart = function(){
 		$("body").bind("keypress",function(e) { MyKeyPress(e.keyCode || e.which)});
 		lastAnsweredQuestion = 0;
 		getQuestion();
 		$interval(startMusic, 1, 1);
 	}
-		
+			
+	//Lancement de l'intro 
 	soundService.intro();
-	var url = quizService.getFullPath();
+	var url = quizService.getFullPath();	
 	
+	//Chargement du quiz
 	$http.get(url)
 	.success(function(data) {		
 		$scope.theme = data.theme;
@@ -79,21 +83,26 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 	   $scope.currentCat = null;
 	   $scope.error = "Impossible de charger le quiz";
 	});
+	
+	//Lancement de l'intro
 	$interval(goStart, timer_intro, 1);
 	
+	//Petite fonction de gestion de l'affichage du hard mode - mériterai un peu d'amélioration
 	var warningHardMode = function(){
 		musicService.stop();
 		$scope.showHardMode = true;
 		$("body").addClass("hard");
-		$interval(doNextQuestion, 6000, 1);
+		$interval(doNextQuestion, 4000, 1);
 		soundService.hardmode();
-		$interval(playHard, 5990, 1);
+		$interval(playHard, 3990, 1);
 	};
 	
+	//Changement de la musique lors du Hard Mode
 	var playHard = function(){
 		musicService.play_hard();
 	}
 	
+	//Préparatif chargement d'une question
 	var getQuestion = function(){
 		$interval.cancel(chrono);
 		$scope.numeroQuestion++;
@@ -104,6 +113,7 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 		else doNextQuestion();	
 	}
 	
+	//Suivante - chargement d'une question	
 	var doNextQuestion = function(){
 		$scope.showHardMode = false;
 		$scope.currentQuestion = difficulties.pop();
@@ -118,8 +128,8 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 		}
 	}
 	
+	//Timer
 	var decreaseCurrentScore = function(){
-		
 		if($scope.currentScore == 0) {
 			$interval.cancel(chrono);
 			if(dieOnTimeOut) $interval(goLoose, delay, 1);
@@ -133,24 +143,25 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 		}
 	}
 	
+	//Callback permettant le chargement du texte de la chanson.
 	var refreshMusicText = function(txt){
 		$scope.musictext = txt;
 	}
 	
+	//Eclairage d'une question via click	
 	$scope.highlight = function(idQuestion, index){
 		$("#question .reponseQuiz").removeClass("highlight");
 		soundService.click();
 		$("#reponse-"+idQuestion+"-"+index).addClass("highlight");
 		$scope.highlighted = index;
 	}
-	
+	//Eclairage d'une question via clavier	
 	var highlightByIndex = function(index){
-		alert(index);
 		$scope.highlight($scope.currentQuestion.id, index);
 
 	}
 	
-	
+	//Confirmation d'une question via click
 	$scope.answering = function(idQuestion, index, w){
 		soundService.stopall();
 		if(lastAnsweredQuestion == idQuestion) return;
@@ -172,7 +183,8 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 		}
 		$scope.highlighted = null;		
 	}
-	
+		
+	//Confirmation d'une question via clavier
 	var confirmByKeyboard = function(){	
 		var index = $scope.highlighted;
 	    if(index == null) return;
@@ -180,6 +192,7 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 		$scope.answering($scope.currentQuestion.id, index , w);
 	}
 	
+	//Quelle touche du clavier équivaut à quelle action ?	
 	var MyKeyPress = function(intkey){
 
 		var str = String.fromCharCode(intkey).toUpperCase();
@@ -198,10 +211,11 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 		if($.inArray( str, buttons_start ) > -1){
 			return confirmByKeyboard();
 		}
+		
 
 	}
 	
-	
+	//Perdu, on bascule vers écran idoine
 	var goLoose = function(){
 		$("body").unbind("keypress");
 		$interval.cancel(chrono);
@@ -210,7 +224,8 @@ app.controller('gameController', ['$route','$location','$interval','$http','$sco
 		plService.setAnswers($scope.numeroQuestion);
 		$location.path("/loose"); 
 	}
-		
+	
+	//Gagné, on bascule vers écran idoine	
 	var goWin = function() {
 		$("body").unbind("keypress");
 		$interval.cancel(chrono);
